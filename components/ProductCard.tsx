@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '@/data/products';
 import { useCart } from '@/context/CartContext';
-import { formatCurrencyRub } from '@/lib/currency';
+import { formatCurrencyRub } from '../lib/currency';
 
 export default function ProductCard({ product }: { product: Product }) {
 	const { addToCart } = useCart();

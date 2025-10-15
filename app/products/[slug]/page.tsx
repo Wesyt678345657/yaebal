@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getProductBySlug } from '@/data/products';
 import { AddToCartButton } from './sections';
-import { formatCurrencyRub } from '@/lib/currency';
+import { formatCurrencyRub } from '../../../lib/currency';
 
 export default function ProductDetail({ params }: { params: { slug: string } }) {
 	const product = getProductBySlug(params.slug);

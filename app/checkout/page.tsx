@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useCart } from '@/context/CartContext';
-import { formatCurrencyRub } from '@/lib/currency';
+import { formatCurrencyRub } from '../../lib/currency';
 
 export default function CheckoutPage() {
 	const { subtotal, shipping, total, clearCart } = useCart();
