@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getProductBySlug } from '@/data/products';
 import { AddToCartButton } from './sections';
+import { formatCurrencyRub } from '@/lib/currency';
 
 export default function ProductDetail({ params }: { params: { slug: string } }) {
 	const product = getProductBySlug(params.slug);
@@ -13,7 +14,7 @@ export default function ProductDetail({ params }: { params: { slug: string } }) 
 			<p className="muted" style={{marginTop:0}}>{product.farmer}</p>
 			<p>{product.description}</p>
 			<div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
-				<div><strong className="price">{product.price} ₽</strong> <span className="muted">/ {product.unit}</span></div>
+				<div><strong className="price">{formatCurrencyRub(product.price)}</strong> <span className="muted">/ {product.unit}</span></div>
 				<AddToCartButton product={product} />
 			</div>
 		</div>

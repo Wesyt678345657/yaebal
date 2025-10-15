@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '@/data/products';
 import { useCart } from '@/context/CartContext';
+import { formatCurrencyRub } from '@/lib/currency';
 
 export default function ProductCard({ product }: { product: Product }) {
 	const { addToCart } = useCart();
@@ -16,7 +17,7 @@ export default function ProductCard({ product }: { product: Product }) {
 				<Link href={`/products/${product.slug}`}><h3 style={{margin:0, fontSize:16}}>{product.title}</h3></Link>
 				<p className="muted" style={{margin:0}}>{product.farmer}</p>
 				<div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
-					<span className="price">{product.price} ₽ / {product.unit}</span>
+					<span className="price">{formatCurrencyRub(product.price)} / {product.unit}</span>
 					<button className="btn" onClick={() => addToCart(product)}>В корзину</button>
 				</div>
 			</div>

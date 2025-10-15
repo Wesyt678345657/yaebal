@@ -3,9 +3,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
+import { formatCurrencyRub } from '@/lib/currency';
 
 export default function CartPage() {
-	const { state, setQuantity, removeFromCart, subtotal, clearCart } = useCart();
+	const { state, setQuantity, removeFromCart, subtotal, clearCart, shipping, total } = useCart();
 	return (
 		<div style={{display:'grid', gap: 16}}>
 			<h1 style={{fontSize:24}}>Корзина</h1>
@@ -30,18 +31,29 @@ export default function CartPage() {
 								</div>
 							</div>
 							<div style={{textAlign:'right'}}>
-								<div className="price">{item.price * item.quantity} ₽</div>
+								<div className="price">{formatCurrencyRub(item.price * item.quantity)}</div>
 							</div>
 						</div>
 					))}
-					<div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
-						<button className="btn" onClick={clearCart}>Очистить</button>
-						<div>
-							<strong>Итого: {subtotal} ₽</strong>
+					<div style={{display:'grid', gap: 8}}>
+						<div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+							<span className="muted">Товары</span>
+							<span className="price">{formatCurrencyRub(subtotal)}</span>
 						</div>
-					</div>
-					<div>
-						<Link className="btn" href="/checkout">Оформить заказ</Link>
+						<div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+							<span className="muted">Доставка</span>
+							<span className="price">{shipping === 0 ? 'Бесплатно' : formatCurrencyRub(shipping)}</span>
+						</div>
+						<div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
+							<strong>Итого</strong>
+							<strong className="price">{formatCurrencyRub(total)}</strong>
+						</div>
+						<div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginTop: 4}}>
+							<button className="btn" onClick={clearCart}>Очистить</button>
+							<div>
+								<a className="btn" href="/checkout">Оформить заказ</a>
+							</div>
+						</div>
 					</div>
 				</div>
 			)}
